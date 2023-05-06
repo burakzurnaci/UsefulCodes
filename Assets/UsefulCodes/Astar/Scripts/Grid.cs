@@ -6,6 +6,7 @@ namespace UsefulCodes.Astar.Scripts
 {
     public class Grid : MonoBehaviour
     {
+        public bool onlyDisplayPathGizmos;
         public LayerMask UnwalkableMask;
         public Vector2 GridWorldSize;
         public float NodeRadius;
@@ -23,6 +24,14 @@ namespace UsefulCodes.Astar.Scripts
             _gridSizeZ = Mathf.RoundToInt(GridWorldSize.y/_nodeDiameter);
             CreateGrid();
             
+        }
+
+        public int MaxSize
+        {
+            get
+            {
+                return _gridSizeX * _gridSizeZ;
+            }
         }
 
         private void CreateGrid()
@@ -81,15 +90,29 @@ namespace UsefulCodes.Astar.Scripts
         {
             Gizmos.DrawWireCube(transform.position,new Vector3(GridWorldSize.x,1,GridWorldSize.y));
 
-            if (_grid != null)
+            if (onlyDisplayPathGizmos)
             {
-                foreach (Node n in _grid)
+                if (Path != null)
                 {
-                    Gizmos.color = (n.Walkable) ? Color.white : Color.red;
-                    if(Path != null )
-                        if(Path.Contains(n))
-                            Gizmos.color = Color.black;
-                    Gizmos.DrawCube(n.WorldPosition,Vector3.one * (_nodeDiameter-.1f));
+                    foreach (Node n in Path)
+                    {
+                        Gizmos.color=Color.black;
+                        Gizmos.DrawCube(n.WorldPosition,Vector3.one * (_nodeDiameter-.1f));
+                    }
+                }
+            }
+            else
+            {
+                if (_grid != null)
+                {
+                    foreach (Node n in _grid)
+                    {
+                        Gizmos.color = (n.Walkable) ? Color.white : Color.red;
+                        if(Path != null )
+                            if(Path.Contains(n))
+                                Gizmos.color = Color.black;
+                        Gizmos.DrawCube(n.WorldPosition,Vector3.one * (_nodeDiameter-.1f));
+                    }
                 }
             }
         }

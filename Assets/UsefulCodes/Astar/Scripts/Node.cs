@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UsefulCodes.Astar.Scripts
 {
-    public class Node
+    public class Node : IHeapItem<Node>
     {
         public bool Walkable;
         public Vector3 WorldPosition;
@@ -12,6 +12,7 @@ namespace UsefulCodes.Astar.Scripts
         public int GCost;
         public int HCost;
         public Node Parent;
+        private int heapIndex;
         
 
         public Node(bool walkable, Vector3 worldPos, int gridX, int gridZ)
@@ -29,6 +30,33 @@ namespace UsefulCodes.Astar.Scripts
                 return GCost + HCost;
             }
         }
+
+        public int HeapIndex
+        {
+            get
+            {
+                return heapIndex;
+            }
+            set
+            {
+                heapIndex = value;
+            }
+        }
+
+        public int CompareTo(Node nodeToCompare)
+        {
+            int compare = FCost.CompareTo(nodeToCompare.FCost);
+            if (compare == 0)
+            {
+                compare = HCost.CompareTo(nodeToCompare.HCost);
+            }
+
+            return -compare;
+        }
     }
+    
+    
+    
+    
 }
 

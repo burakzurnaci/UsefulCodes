@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 namespace UsefulCodes.Astar.Scripts
 {
@@ -19,11 +20,16 @@ namespace UsefulCodes.Astar.Scripts
 
         private void Update()
         {
-            FindPath(Seeker.position,Target.position);
+            if (Input.GetButtonDown("Jump"))
+            {
+                FindPath(Seeker.position,Target.position);
+            }
         }
 
         private void FindPath(Vector3 startPos, Vector3 targetPos)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             Node startNode = _grid.NodeFromWorldPoint(startPos);
             Node targetNode = _grid.NodeFromWorldPoint(targetPos);
 
@@ -47,6 +53,8 @@ namespace UsefulCodes.Astar.Scripts
 
                 if (currentNode == targetNode)
                 {
+                    sw.Stop();
+                    print("Path found: " + sw.ElapsedMilliseconds + " ms");
                     RetracePath(startNode,targetNode);
                     return;
                 }
