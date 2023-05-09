@@ -8,21 +8,14 @@ namespace UsefulCodes.Astar.Scripts
 {
     public class PathFinding : MonoBehaviour
     {
-        private PathRequestManager _requestManager;
         private Grid _grid;
 
         private void Awake()
         {
-            _requestManager = GetComponent<PathRequestManager>();
             _grid = GetComponent<Grid>();
         }
         
-        public void StartFindPath(Vector3 startPos,Vector3 targetPos)
-        {
-            StartCoroutine(FindPath(startPos, targetPos));
-        }
-
-        IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
+        public void FindPath(PathRequest request,Action<PathResult> callback)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -30,8 +23,8 @@ namespace UsefulCodes.Astar.Scripts
             Vector3[] _waypoints = new Vector3[0];
             bool _pathSuccess = false;
             
-            Node startNode = _grid.NodeFromWorldPoint(startPos);
-            Node targetNode = _grid.NodeFromWorldPoint(targetPos);
+            Node startNode = _grid.NodeFromWorldPoint(request.PathStart);
+            Node targetNode = _grid.NodeFromWorldPoint(request.PathEnd);
 
             if (startNode.Walkable && targetNode.Walkable)
             {
@@ -76,13 +69,13 @@ namespace UsefulCodes.Astar.Scripts
                     }
                 }
             }
-
-            yield return null;
             if (_pathSuccess)
             {
                 _waypoints=RetracePath(startNode,targetNode);
+                _pathSuccess = _waypoints.Length > 0;
             }
-            _requestManager.FinishedProcessingPath(_waypoints,_pathSuccess);
+
+            callback(new PathResult(_waypoints, _pathSuccess, request.Callback));
         }
 
         private Vector3[] RetracePath(Node startNode, Node endNode)

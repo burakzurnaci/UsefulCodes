@@ -37,7 +37,7 @@ namespace UsefulCodes.Astar.Scripts
             if (Time.timeSinceLevelLoad < .3f) {
                 yield return new WaitForSeconds(.3f);
             }
-            PathRequestManager.RequestPath(transform.position,target.position,OnPathFound);
+            PathRequestManager.RequestPath(new PathRequest(transform.position,target.position,OnPathFound));
             
             float sqrMoveThreshold = _pathUpdateMoveThreshold * _pathUpdateMoveThreshold;
             Vector3 targetPosOld = target.position;
@@ -47,7 +47,7 @@ namespace UsefulCodes.Astar.Scripts
                 yield return new WaitForSeconds(_minPathUpdateTime);
                 if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
                 {
-                    PathRequestManager.RequestPath(transform.position,target.position,OnPathFound);
+                    PathRequestManager.RequestPath(new PathRequest(transform.position,target.position,OnPathFound));
                     targetPosOld = target.position;
                 }
                 
