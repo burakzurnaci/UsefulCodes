@@ -2,16 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
 
 namespace UsefulCodes.Astar.Scripts
 {
     public class PathRequestManager : MonoBehaviour
     {
-        private Queue<PathResult> _results = new Queue<PathResult>();
+        private Queue<PathRequest> _pathRequestQueue = new Queue<PathRequest>();
+        private PathRequest _currentPathRequest;
+
         private static PathRequestManager instance;
         private PathFinding _pathFinding;
 
+        private bool _isProcessingPath;
 
         private void Awake()
         {
@@ -19,77 +21,44 @@ namespace UsefulCodes.Astar.Scripts
             _pathFinding = GetComponent<PathFinding>();
         }
 
-        private void Update()
+
+        public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
         {
-            if (_results.Count > 0)
+            PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
+            instance._pathRequestQueue.Enqueue(newRequest);
+            instance.TryProcessNext();
+        }
+
+        void TryProcessNext()
+        {
+            if (!_isProcessingPath && _pathRequestQueue.Count > 0)
             {
-                int itemInQueue = _results.Count;
-                lock (_results)
-                {
-                    for (int i = 0; i < itemInQueue; i++)
-                    {
-                        PathResult result = _results.Dequeue();
-                        result.Callback(result.Path, result.Success);
-                    }
-                }
+                _currentPathRequest = _pathRequestQueue.Dequeue();
+                _isProcessingPath = true;
+                _pathFinding.StartFindPath(_currentPathRequest.PathStart, _currentPathRequest.PathEnd);
             }
         }
 
-
-        public static void RequestPath(PathRequest request)
+        public void FinishedProcessingPath(Vector3[] path, bool success)
         {
-            ThreadStart threadStart = delegate
-            {
-                instance._pathFinding.FindPath(request, instance.FinishedProcessingPath);
-            };
-            threadStart.Invoke();
+            _currentPathRequest.Callback(path, success);
+            _isProcessingPath = false;
+            TryProcessNext();
         }
 
-      
-
-        public void FinishedProcessingPath(PathResult result)
+        struct PathRequest
         {
-            lock (_results)
+            public Vector3 PathStart;
+            public Vector3 PathEnd;
+            public Action<Vector3[], bool> Callback;
+
+            public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
             {
-                _results.Enqueue(result);
+                PathStart = _start;
+                PathEnd = _end;
+                Callback = _callback;
+
             }
-            
-        }
-        
-    }
-    public struct PathResult
-    {
-        public Vector3[] Path;
-        public bool Success;
-        public Action<Vector3[], bool> Callback;
-
-        public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback)
-        {
-            Path = path;
-            Success = success;
-            Callback = callback;
-        }
-
-    }
-    
-    public struct PathRequest
-    {
-        public Vector3 PathStart;
-        public Vector3 PathEnd;
-        public Action<Vector3[], bool> Callback;
-
-        public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
-        {
-            PathStart = _start;
-            PathEnd = _end;
-            Callback = _callback;
-
         }
     }
-    
-    
-    
 }
-
-
-
