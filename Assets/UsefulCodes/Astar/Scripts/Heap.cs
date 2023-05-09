@@ -35,13 +35,13 @@ namespace UsefulCodes.Astar.Scripts
             SortUp(item);
         }
     
-       // public int Count() {
+        public int Count {
         
-          //  get
-          //  {
-          //      return currentItemCount;
-          //  }
-       // }
+            get
+            {
+                return currentItemCount;
+            }
+        }
     
 
         public bool Contains(T item)
@@ -54,7 +54,7 @@ namespace UsefulCodes.Astar.Scripts
             while (true)
             {
                 int childIndexLeft = item.HeapIndex * 2 + 1;
-                int childIndexRight = item.HeapIndex * 2 + 1;
+                int childIndexRight = item.HeapIndex * 2 + 2;
                 int swapIndex = 0;
 
                 if (childIndexLeft < currentItemCount)

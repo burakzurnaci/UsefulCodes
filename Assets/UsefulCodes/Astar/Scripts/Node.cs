@@ -8,6 +8,7 @@ namespace UsefulCodes.Astar.Scripts
         public Vector3 WorldPosition;
         public int GridX;
         public int GridZ;
+        public int MovementPenalty;
         
         public int GCost;
         public int HCost;
@@ -15,12 +16,13 @@ namespace UsefulCodes.Astar.Scripts
         private int heapIndex;
         
 
-        public Node(bool walkable, Vector3 worldPos, int gridX, int gridZ)
+        public Node(bool walkable, Vector3 worldPos, int gridX, int gridZ, int _penalty)
         {
             Walkable = walkable;
             WorldPosition = worldPos;
             GridX = gridX;
             GridZ = gridZ;
+            MovementPenalty = _penalty;
         }
 
         public int FCost
