@@ -8,8 +8,9 @@ namespace UsefulCodes.Astar.Scripts
         public readonly Vector3[] LookPoints;
         public readonly Line[] TurnBoundaries;
         public readonly int FinishLineIndex;
+        public readonly int SlowDownIndex;
 
-        public LinePath(Vector3[] wayPoints, Vector3 startPos, float turnDst)
+        public LinePath(Vector3[] wayPoints, Vector3 startPos, float turnDst, float stoppingDst)
         {
             LookPoints = wayPoints;
             TurnBoundaries = new Line[LookPoints.Length];
@@ -23,6 +24,16 @@ namespace UsefulCodes.Astar.Scripts
                 Vector2 turnBoundaryPoint =(i==FinishLineIndex)?currentPoint : currentPoint - dirToCurrentPoint * turnDst;
                 TurnBoundaries[i] =  new Line(turnBoundaryPoint, previousPoint-dirToCurrentPoint * turnDst);
                 previousPoint = turnBoundaryPoint;
+            }
+
+            float dstFromEndPoint = 0;
+            for (int i = LookPoints.Length-1; i > 0; i--)
+            {
+                dstFromEndPoint += Vector3.Distance(LookPoints[i], LookPoints[i - 1]);
+                if (dstFromEndPoint > stoppingDst) {
+                    SlowDownIndex = i;
+                    break;
+                }
             }
         }
 

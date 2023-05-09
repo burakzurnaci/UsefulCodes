@@ -156,9 +156,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
-  Speed: 20
-  TurnDst: 5
-  TurnSpeed: 3
+  Speed: 40
+  TurnDst: 30
+  TurnSpeed: 50
+  StoppingDistance: 30
 --- !u!136 &59718555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -982,9 +983,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
-  Speed: 20
-  TurnDst: 5
-  TurnSpeed: 3
+  Speed: 40
+  TurnDst: 30
+  TurnSpeed: 50
+  StoppingDistance: 30
 --- !u!136 &1076889559
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1401,9 +1403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
-  Speed: 20
-  TurnDst: 5
-  TurnSpeed: 3
+  Speed: 40
+  TurnDst: 30
+  TurnSpeed: 50
+  StoppingDistance: 30
 --- !u!136 &1401589261
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1687,6 +1690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
-  Speed: 20
-  TurnDst: 5
-  TurnSpeed: 3
+  Speed: 40
+  TurnDst: 30
+  TurnSpeed: 50
+  StoppingDistance: 30
