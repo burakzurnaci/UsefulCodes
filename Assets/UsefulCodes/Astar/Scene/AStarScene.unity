@@ -157,8 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
   Speed: 40
-  TurnDst: 30
-  TurnSpeed: 50
+  TurnDst: 3
+  TurnSpeed: 5
   StoppingDistance: 30
 --- !u!136 &59718555
 CapsuleCollider:
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 66177389}
   - component: {fileID: 66177388}
   - component: {fileID: 66177387}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94338476}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 427458631}
   - component: {fileID: 427458630}
   - component: {fileID: 427458629}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427458627}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.9624414, y: 0, z: -30.737373}
+  m_LocalPosition: {x: -4.9624414, y: 0, z: 6.3}
   m_LocalScale: {x: 9.920486, y: 9.920486, z: 30.91918}
   m_Children: []
   m_Father: {fileID: 94338476}
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 532329472}
   - component: {fileID: 532329471}
   - component: {fileID: 532329470}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532329469}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.2, y: 0, z: 0.2}
+  m_LocalPosition: {x: -37.1, y: 0, z: 0.2}
   m_LocalScale: {x: 9.920486, y: 9.920486, z: 9.920486}
   m_Children: []
   m_Father: {fileID: 94338476}
@@ -709,17 +709,17 @@ MonoBehaviour:
   DisplayGridGizmos: 0
   UnwalkableMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   GridWorldSize: {x: 100, y: 100}
   NodeRadius: 0.5
   WalkableRegions:
   - TerrainMask:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 512
     TerrainPenalty: 0
   - TerrainMask:
       serializedVersion: 2
-      m_Bits: 256
+      m_Bits: 1024
     TerrainPenalty: 5
   ObstacleProximityPenalty: 10
 --- !u!4 &626161567
@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 673267737}
   - component: {fileID: 673267736}
   - component: {fileID: 673267735}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673267733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.2, y: 0, z: 31.3}
+  m_LocalPosition: {x: -33.2, y: 0, z: 30.6}
   m_LocalScale: {x: 26.019455, y: 9.920486, z: 9.920486}
   m_Children: []
   m_Father: {fileID: 94338476}
@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 981678620}
   - component: {fileID: 981678619}
   - component: {fileID: 981678618}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,8 +984,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
   Speed: 40
-  TurnDst: 30
-  TurnSpeed: 50
+  TurnDst: 3
+  TurnSpeed: 5
   StoppingDistance: 30
 --- !u!136 &1076889559
 CapsuleCollider:
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 1124195550}
   - component: {fileID: 1124195549}
   - component: {fileID: 1124195548}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124195546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.7, y: 0, z: -12.880497}
+  m_LocalPosition: {x: 11.7, y: 0, z: -23.6}
   m_LocalScale: {x: 24.79824, y: 9.920486, z: 9.920486}
   m_Children: []
   m_Father: {fileID: 94338476}
@@ -1265,7 +1265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 383789ecc69c44192ac058d1f25713df, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 383789ecc69c44192ac058d1f25713df, type: 3}
       propertyPath: m_RootOrder
@@ -1319,7 +1319,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 383789ecc69c44192ac058d1f25713df, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 383789ecc69c44192ac058d1f25713df, type: 3}
 --- !u!1 &1250774368 stripped
 GameObject:
@@ -1404,8 +1405,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
   Speed: 40
-  TurnDst: 30
-  TurnSpeed: 50
+  TurnDst: 3
+  TurnSpeed: 5
   StoppingDistance: 30
 --- !u!136 &1401589261
 CapsuleCollider:
@@ -1691,6 +1692,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1450896142}
   Speed: 40
-  TurnDst: 30
-  TurnSpeed: 50
+  TurnDst: 3
+  TurnSpeed: 5
   StoppingDistance: 30
